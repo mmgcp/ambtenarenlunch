@@ -39,7 +39,7 @@ export const offices: Office[] = [
   // ─── Amstel 1 ── existing ────────────────────────────────────────
   {
     id: 'amstel1',
-    name: 'Stopera',
+    name: 'de Stopera',
     address: 'Amstel 1, Centrum',
     lat: 52.3675,  // ✓ research agent
     lng: 4.9013,
@@ -92,6 +92,18 @@ export const offices: Office[] = [
         price: '€',
         lat: 52.36758131103344,
         lng: 4.901944812890541,
+      },
+      {
+        name: 'Sterk Staaltje',
+        address: 'Staalstraat 12',
+        description: 'Traiteur met lekkere belegde broodjes waar je ook snel fles wijn kan halen voor die ene verjaardag die je die avond hebt',
+        walkingTime: 2,
+        busyness: 'Rij gaat snel',
+        busynessLevel: 'medium',
+        recommend: 'Alles op een foccacia',
+        price: '€€',
+        lat: 52.36840639230575,
+        lng: 4.897014882201792,
       },
     ],
   },
@@ -615,7 +627,7 @@ export const offices: Office[] = [
   // ─── Weesperplein 8 ── NEW ───────────────────────────────────────
   {
     id: 'weesperplein',
-    name: 'Weesperplein 8',
+    name: 'Weesperplein',
     address: 'Weesperplein 8, Centrum',
     lat: 52.3618,  // ~ Weesperplein metro area
     lng: 4.9090,
