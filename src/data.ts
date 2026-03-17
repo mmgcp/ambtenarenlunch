@@ -48,9 +48,9 @@ export const offices: Office[] = [
       {
         name: 'Tokoman',
         address: 'Waterlooplein 327',
-        description: 'Legendarisch Surinaams eettentje op de hoek van de markt. Altijd een rij, altijd de moeite waard.',
+        description: 'Legendarisch Surinaams eettentje op de hoek. Altijd een rij, altijd de moeite waard.',
         walkingTime: 4,
-        busyness: 'Erg druk 12–13u',
+        busyness: 'Erg druk met de lunch',
         busynessLevel: 'busy',
         recommend: 'Roti met kip of pom',
         price: '€',
@@ -72,26 +72,26 @@ export const offices: Office[] = [
       {
         name: 'Grand Café De Jaren',
         address: 'Nieuwe Doelenstraat 20',
-        description: 'Ruim grand café aan de Amstel met een van de grootste terrassen van de stad.',
+        description: 'Ruim grand café aan de Amstel met een van de grootste terrassen van de stad. Alleen voor lange lunches.',
         walkingTime: 7,
         busyness: 'Rustig na 13u',
-        busynessLevel: 'quiet',
-        recommend: 'Club sandwich of pasta van de dag',
+        busynessLevel: 'busy',
+        recommend: 'Club sandwich',
         price: '€€',
         lat: 52.3680,
         lng: 4.8954,
       },
       {
-        name: 'Café De Sluyswacht',
-        address: 'Jodenbreestraat 1',
-        description: 'Historische bruine kroeg uit 1695, gebouwd als sluiswachtershuisje. Karaktervol — perfecte pauze van de agenda.',
-        walkingTime: 4,
-        busyness: 'Zelden te druk',
-        busynessLevel: 'quiet',
-        recommend: 'Broodje kaas of erwtensoep',
+        name: 'De Hapjeshoek',
+        address: 'Metrostation Waterlooplein',
+        description: 'Even de metro in duiken voor één van de beste tentjes van Amsterdam - goed voor een regenachtige dag en een goede lunch.',
+        walkingTime: 2,
+        busyness: 'Rij gaat snel',
+        busynessLevel: 'medium',
+        recommend: 'Roti roll of broodje pom',
         price: '€',
-        lat: 52.3723,
-        lng: 4.9009,
+        lat: 52.36758131103344,
+        lng: 4.901944812890541,
       },
     ],
   },
@@ -346,7 +346,7 @@ export const offices: Office[] = [
   // ─── Klaprozenweg 91 ── NEW ──────────────────────────────────────
   {
     id: 'klaprozenweg',
-    name: 'Klaprozenweg 91',
+    name: 'Klaprozenweg',
     address: 'Klaprozenweg 91, Noord',
     lat: 52.4036,  // ~ agent research
     lng: 4.8830,
@@ -357,7 +357,7 @@ export const offices: Office[] = [
   // ─── Nieuwe Achtergracht 100 ── NEW ─────────────────────────────
   {
     id: 'nieuweachtergracht',
-    name: 'Nieuwe Achtergracht 100',
+    name: 'Nieuwe Achtergracht',
     address: 'Nieuwe Achtergracht 100, Centrum',
     lat: 52.3620,  // ~ agent research / UvA area
     lng: 4.9100,
@@ -499,7 +499,7 @@ export const offices: Office[] = [
   // ─── Oudezijds Voorburgwal 300 ── NEW ───────────────────────────
   {
     id: 'oudezijds',
-    name: 'Oudezijds Voorburgwal 300',
+    name: 'Stadsbank van leningen',
     address: 'Oudezijds Voorburgwal 300, Centrum',
     lat: 52.3716,  // ~ Centrum, UvA/OV area
     lng: 4.8963,
@@ -578,22 +578,11 @@ export const offices: Office[] = [
     ],
   },
 
-  // ─── Strawinskylaan 59 ── NEW ────────────────────────────────────
-  {
-    id: 'strawinskylaan',
-    name: 'Strawinskylaan 59',
-    address: 'Strawinskylaan 59, Zuidas',
-    lat: 52.3388,  // ~ WTC Amsterdam / Zuidas
-    lng: 4.8740,
-    zoom: 16,
-    restaurants: [],
-  },
-
   // ─── Theemsweg 28 ── NEW ─────────────────────────────────────────
   // Confirmed postcode 1043 BJ → Sloterdijk bedrijventerrein
   {
     id: 'theemsweg',
-    name: 'Theemsweg 28',
+    name: 'Theemsweg',
     address: 'Theemsweg 28, Sloterdijk',
     lat: 52.3940,  // ~ postcode 1043 BJ, Sloterdijk
     lng: 4.8410,
@@ -604,7 +593,7 @@ export const offices: Office[] = [
   // ─── Van Hogendorpstraat 202 ── NEW ─────────────────────────────
   {
     id: 'hogendorpstraat',
-    name: 'Van Hogendorpstraat 202',
+    name: 'Van Hogendorpstraat',
     address: 'Van Hogendorpstraat 202, West',
     lat: 52.3795,  // ~ agent research, Landlust/West
     lng: 4.8714,
@@ -615,7 +604,7 @@ export const offices: Office[] = [
   // ─── Vijzelstraat 32 (Herengracht 482) ── NEW ───────────────────
   {
     id: 'vijzelstraat',
-    name: 'Vijzelstraat 32',
+    name: 'Stadsarchief',
     address: 'Vijzelstraat 32 / Herengracht 482, Centrum',
     lat: 52.3647,  // ~ De Bazel building, Vijzelstraat
     lng: 4.8966,
