@@ -7,6 +7,7 @@ import { offices, type Office } from './data';
 let map: L.Map;
 let officeMarkers: Map<string, L.Marker> = new Map();
 let restaurantMarkers: L.Marker[] = [];
+let currentOfficeId: string | null = null;
 
 // ─── DOM refs ─────────────────────────────────────────────────────────
 const officePanel = document.getElementById('office-panel')!;
@@ -16,6 +17,10 @@ const restaurantList = document.getElementById('restaurant-list')!;
 const panelOfficeName = document.getElementById('panel-office-name')!;
 const panelOfficeAddress = document.getElementById('panel-office-address')!;
 const backBtn = document.getElementById('back-btn')!;
+const suggestModal = document.getElementById('suggest-modal') as HTMLElement;
+const suggestForm = document.getElementById('suggest-form') as HTMLFormElement;
+const formSuccess = document.getElementById('form-success') as HTMLElement;
+const officeSelect = document.getElementById('suggest-office') as HTMLSelectElement;;
 
 // ─── Map initialisation ───────────────────────────────────────────────
 function initMap(): void {
@@ -97,6 +102,7 @@ function clearRestaurantMarkers(): void {
 
 // ─── Office selection ─────────────────────────────────────────────────
 function selectOffice(office: Office): void {
+  currentOfficeId = office.id;
 
   // Update marker icons
   officeMarkers.forEach((marker, id) => {
@@ -120,6 +126,8 @@ function selectOffice(office: Office): void {
 }
 
 function goBack(): void {
+  currentOfficeId = null;
+
   // Reset all office markers
   officeMarkers.forEach((marker) => {
     marker.setIcon(makeOfficeIcon(false));
@@ -239,6 +247,63 @@ function renderOfficeList(): void {
     officeList.appendChild(btn);
   });
 }
+
+// ─── Suggest modal ────────────────────────────────────────────────────
+function openSuggestModal(preselectedOfficeId?: string): void {
+  // Populate office dropdown
+  officeSelect.innerHTML = '<option value="">Kies een kantoor…</option>';
+  offices.forEach((office) => {
+    const opt = document.createElement('option');
+    opt.value = office.name;
+    opt.textContent = office.name;
+    if (preselectedOfficeId && office.id === preselectedOfficeId) opt.selected = true;
+    officeSelect.appendChild(opt);
+  });
+
+  suggestForm.hidden = false;
+  formSuccess.hidden = true;
+  suggestForm.reset();
+  if (preselectedOfficeId) {
+    const match = offices.find((o) => o.id === preselectedOfficeId);
+    if (match) officeSelect.value = match.name;
+  }
+  suggestModal.removeAttribute('hidden');
+}
+
+function closeSuggestModal(): void {
+  suggestModal.setAttribute('hidden', '');
+}
+
+document.getElementById('modal-close')!.addEventListener('click', closeSuggestModal);
+suggestModal.addEventListener('click', (e) => { if (e.target === suggestModal) closeSuggestModal(); });
+
+document.getElementById('suggest-btn-office')!.addEventListener('click', () => openSuggestModal());
+document.getElementById('suggest-btn-restaurant')!.addEventListener('click', () => {
+  openSuggestModal(currentOfficeId ?? undefined);
+});
+
+suggestForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const submitBtn = suggestForm.querySelector('.form-submit') as HTMLButtonElement;
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Bezig…';
+
+  const data = new FormData(suggestForm);
+  const res = await fetch('https://formspree.io/f/xyknblow', {
+    method: 'POST',
+    body: data,
+    headers: { Accept: 'application/json' },
+  });
+
+  if (res.ok) {
+    suggestForm.hidden = true;
+    formSuccess.hidden = false;
+  } else {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Verstuur suggestie';
+    alert('Er ging iets mis. Probeer het opnieuw.');
+  }
+});
 
 // ─── Boot ─────────────────────────────────────────────────────────────
 backBtn.addEventListener('click', goBack);

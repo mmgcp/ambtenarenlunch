@@ -20,6 +20,12 @@
       </div>
       <p class="panel-label">Kies je kantoor</p>
       <div id="office-list"></div>
+      <div class="suggest-footer">
+        <button class="suggest-btn" id="suggest-btn-office">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Stel een restaurant voor
+        </button>
+      </div>
     </div>
 
     <!-- Restaurant panel (hidden by default) -->
@@ -35,6 +41,46 @@
         <p class="office-heading-address" id="panel-office-address"></p>
       </div>
       <div id="restaurant-list"></div>
+      <div class="suggest-footer">
+        <button class="suggest-btn" id="suggest-btn-restaurant">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Stel een restaurant voor
+        </button>
+      </div>
+    </div>
+
+    <!-- Suggest modal -->
+    <div id="suggest-modal" class="modal-overlay" hidden>
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title">Stel een restaurant voor</h3>
+          <button class="modal-close" id="modal-close" aria-label="Sluiten">&times;</button>
+        </div>
+        <form id="suggest-form">
+          <div class="form-group">
+            <label for="suggest-office">Kantoor</label>
+            <select id="suggest-office" name="kantoor" required>
+              <option value="">Kies een kantoor…</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="suggest-name">Naam restaurant</label>
+            <input type="text" id="suggest-name" name="restaurant" required placeholder="bijv. Tokoman">
+          </div>
+          <div class="form-group">
+            <label for="suggest-address">Adres</label>
+            <input type="text" id="suggest-address" name="adres" required placeholder="bijv. Waterlooplein 327">
+          </div>
+          <div class="form-group">
+            <label for="suggest-why">Waarom aanbevelen?</label>
+            <textarea id="suggest-why" name="toelichting" required rows="3" placeholder="Wat maakt dit restaurant een goede lunchtip?"></textarea>
+          </div>
+          <button type="submit" class="form-submit">Verstuur suggestie</button>
+        </form>
+        <div id="form-success" class="form-success" hidden>
+          <p>Bedankt voor je tip! We nemen het mee.</p>
+        </div>
+      </div>
     </div>
 
     <!-- Map -->
