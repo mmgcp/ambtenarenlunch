@@ -337,7 +337,13 @@ html, body {
 }
 
 .office-marker-icon.selected {
-  background: var(--text);
+  background: var(--red);
+}
+
+.office-marker-icon.deselected {
+  background: var(--warm-gray);
+  border-color: #e0dbd4;
+  box-shadow: none;
 }
 
 .restaurant-marker-wrap {

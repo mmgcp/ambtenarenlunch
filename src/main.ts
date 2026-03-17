@@ -46,10 +46,11 @@ function initMap(): void {
 }
 
 // ─── Office markers ───────────────────────────────────────────────────
-function makeOfficeIcon(selected: boolean): L.DivIcon {
+function makeOfficeIcon(state: 'normal' | 'selected' | 'deselected'): L.DivIcon {
+  const cls = state === 'normal' ? '' : ` ${state}`;
   return L.divIcon({
     className: '',
-    html: `<div class="office-marker-icon${selected ? ' selected' : ''}" style="width:16px;height:16px;"></div>`,
+    html: `<div class="office-marker-icon${cls}" style="width:16px;height:16px;"></div>`,
     iconSize: [16, 16],
     iconAnchor: [8, 8],
   });
@@ -58,7 +59,7 @@ function makeOfficeIcon(selected: boolean): L.DivIcon {
 function placeOfficeMarkers(): void {
   offices.forEach((office) => {
     const marker = L.marker([office.lat, office.lng], {
-      icon: makeOfficeIcon(false),
+      icon: makeOfficeIcon('normal'),
     }).addTo(map);
 
     marker.bindTooltip(office.name, {
@@ -106,7 +107,7 @@ function selectOffice(office: Office): void {
 
   // Update marker icons
   officeMarkers.forEach((marker, id) => {
-    marker.setIcon(makeOfficeIcon(id === office.id));
+    marker.setIcon(makeOfficeIcon(id === office.id ? 'selected' : 'deselected'));
   });
 
   // Fly to office
@@ -130,7 +131,7 @@ function goBack(): void {
 
   // Reset all office markers
   officeMarkers.forEach((marker) => {
-    marker.setIcon(makeOfficeIcon(false));
+    marker.setIcon(makeOfficeIcon('normal'));
   });
 
   clearRestaurantMarkers();
