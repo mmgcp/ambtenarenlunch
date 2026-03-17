@@ -10,6 +10,7 @@ const modeConfig = {
   lunch: {
     title: 'Ambtenarenlunch',
     tagline: 'Het is belangrijk goed te eten, ook als ambtenaar! Deze tool is gemaakt om je op de hoogte te houden van de beste lunchtentjes in de buurt van elk gemeente kantoor. Doe suggesties en draag bij aan de lunchervaring van je collega\'s.',
+    taglineShort: 'Het is belangrijk goed te eten, ook als ambtenaar!',
     tileUrl: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
     modalTitle: 'Stel een lunchplek voor',
     suggestBtnText: 'Stel een lunchplek voor',
@@ -24,6 +25,7 @@ const modeConfig = {
   borrel: {
     title: 'Ambtenarenborrel',
     tagline: 'Een goede borrel begint bij de juiste kroeg. Deze tool helpt je de beste cafés en terrassen te vinden in de buurt van elk gemeente kantoor. Doe suggesties en draag bij aan de borrelervaring van je collega\'s.',
+    taglineShort: 'Een goede borrel begint bij de juiste kroeg.',
     tileUrl: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
     modalTitle: 'Stel een café voor',
     suggestBtnText: 'Stel een café voor',
@@ -288,6 +290,14 @@ function renderOfficeList(): void {
   });
 }
 
+// ─── Tagline ──────────────────────────────────────────────────────────
+function updateTagline(): void {
+  const config = modeConfig[currentMode];
+  const isMobile = window.innerWidth <= 600;
+  document.querySelector<HTMLElement>('.site-tagline')!.textContent =
+    isMobile ? config.taglineShort : config.tagline;
+}
+
 // ─── Mode switching ───────────────────────────────────────────────────
 function switchMode(mode: Mode): void {
   currentMode = mode;
@@ -295,8 +305,8 @@ function switchMode(mode: Mode): void {
 
   // Title, tagline + tab
   document.querySelector<HTMLElement>('.site-title')!.textContent = config.title;
-  document.querySelector<HTMLElement>('.site-tagline')!.textContent = config.tagline;
   document.title = config.title;
+  updateTagline();
 
   // Tile layer
   tileLayer.remove();
@@ -391,6 +401,8 @@ suggestForm.addEventListener('submit', async (e) => {
 });
 
 // ─── Boot ─────────────────────────────────────────────────────────────
+window.addEventListener('resize', updateTagline);
+updateTagline();
 backBtn.addEventListener('click', goBack);
 document.querySelectorAll<HTMLElement>('.mode-btn').forEach((btn) => {
   btn.addEventListener('click', () => switchMode(btn.dataset.mode as Mode));
