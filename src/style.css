@@ -437,6 +437,136 @@ html, body {
   line-height: 1.55;
 }
 
+/* ─── Mode toggle ────────────────────────────────────────────────── */
+.mode-toggle {
+  display: flex;
+  margin-top: 14px;
+  background: #ece8e1;
+  border-radius: 20px;
+  padding: 3px;
+  width: fit-content;
+  gap: 2px;
+}
+
+.mode-btn {
+  padding: 5px 16px;
+  border: none;
+  border-radius: 16px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--warm-gray);
+  background: none;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+
+.mode-btn.active {
+  background: white;
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ─── Borrel dark theme ──────────────────────────────────────────── */
+.borrel-mode .panel {
+  background: #1e1a16;
+  box-shadow: 4px 0 24px rgba(0,0,0,0.35);
+}
+
+.borrel-mode .panel-header {
+  border-bottom-color: #3a332c;
+}
+
+.borrel-mode .site-title,
+.borrel-mode .office-heading {
+  color: #f0e8d8;
+}
+
+.borrel-mode .site-tagline,
+.borrel-mode .office-heading-address,
+.borrel-mode .back-btn {
+  color: #7a6e64;
+}
+
+.borrel-mode .panel-label {
+  color: #6a5e54;
+}
+
+.borrel-mode .mode-toggle {
+  background: #2e2820;
+}
+
+.borrel-mode .mode-btn.active {
+  background: #3a332c;
+  color: #f0e8d8;
+}
+
+.borrel-mode .office-btn {
+  background: #2a2420;
+  border-color: #3a332c;
+}
+
+.borrel-mode .office-btn:hover {
+  border-color: var(--red);
+}
+
+.borrel-mode .office-btn-name {
+  color: #f0e8d8;
+}
+
+.borrel-mode .restaurant-card {
+  background: #2a2420;
+  border-color: #3a332c;
+}
+
+.borrel-mode .restaurant-card.selected {
+  background: #2e2218;
+}
+
+.borrel-mode .card-name {
+  color: #f0e8d8;
+}
+
+.borrel-mode .card-address,
+.borrel-mode .card-description,
+.borrel-mode .meta-value {
+  color: #7a6e64;
+}
+
+.borrel-mode .meta-label {
+  color: #b0a498;
+}
+
+.borrel-mode .card-meta {
+  border-top-color: #3a332c;
+}
+
+.borrel-mode .meta-icon {
+  color: #6a5e54;
+}
+
+.borrel-mode .meta-bar {
+  background: #3a332c;
+}
+
+.borrel-mode .suggest-footer {
+  border-top-color: #3a332c;
+}
+
+.borrel-mode .suggest-btn {
+  border-color: #3a332c;
+  color: #6a5e54;
+}
+
+.borrel-mode .suggest-btn:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.borrel-mode .no-restaurants-text {
+  color: #6a5e54;
+}
+
 /* ─── Suggest footer ────────────────────────────────────────────── */
 .suggest-footer {
   flex-shrink: 0;

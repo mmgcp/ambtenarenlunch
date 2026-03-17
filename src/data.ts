@@ -11,6 +11,8 @@ export interface Restaurant {
   lng: number;
 }
 
+export type BorrelVenue = Restaurant;
+
 export interface Office {
   id: string;
   name: string;
@@ -19,6 +21,7 @@ export interface Office {
   lng: number;
   zoom: number;
   restaurants: Restaurant[];
+  borrelVenues?: BorrelVenue[];
 }
 
 // Coordinate sources:

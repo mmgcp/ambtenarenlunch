@@ -3,11 +3,45 @@ import './style.css';
 import L from 'leaflet';
 import { offices, type Office } from './data';
 
+// ─── Mode config ──────────────────────────────────────────────────────
+type Mode = 'lunch' | 'borrel';
+
+const modeConfig = {
+  lunch: {
+    title: 'Ambtenarenlunch',
+    tileUrl: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+    modalTitle: 'Stel een lunchplek voor',
+    suggestBtnText: 'Stel een lunchplek voor',
+    formNameLabel: 'Naam restaurant',
+    formQueueLabel: 'Sta je hier (vaak) in de rij?',
+    formPriceLabel: 'Hoeveel geef je gemiddeld uit voor lunch hier (in euros)?',
+    formWhyLabel: 'Waarom is dit jouw tip en wat bestel jij hier het liefst?',
+    emptyIcon: '🍽️',
+    emptyText: 'Aanbevelingen voor dit kantoor volgen binnenkort.',
+    venueLabel: 'Eettip',
+  },
+  borrel: {
+    title: 'Ambtenarenborrel',
+    tileUrl: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+    modalTitle: 'Stel een café voor',
+    suggestBtnText: 'Stel een café voor',
+    formNameLabel: 'Naam café of kroeg',
+    formQueueLabel: 'Hoe druk is het hier na werk?',
+    formPriceLabel: 'Hoeveel geef je gemiddeld uit per borrel (in euros)?',
+    formWhyLabel: 'Waarom is dit jouw tip en wat drink jij hier het liefst?',
+    emptyIcon: '🍺',
+    emptyText: 'Borrel aanbevelingen voor dit kantoor volgen binnenkort.',
+    venueLabel: 'Tip',
+  },
+} as const;
+
 // ─── State ───────────────────────────────────────────────────────────
 let map: L.Map;
+let tileLayer: L.TileLayer;
 let officeMarkers: Map<string, L.Marker> = new Map();
 let restaurantMarkers: L.Marker[] = [];
 let currentOfficeId: string | null = null;
+let currentMode: Mode = 'lunch';
 
 // ─── DOM refs ─────────────────────────────────────────────────────────
 const officePanel = document.getElementById('office-panel')!;
@@ -30,7 +64,7 @@ function initMap(): void {
     zoomControl: true,
   });
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  tileLayer = L.tileLayer(modeConfig.lunch.tileUrl, {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 19,
@@ -77,8 +111,9 @@ function placeOfficeMarkers(): void {
 // ─── Restaurant markers ───────────────────────────────────────────────
 function placeRestaurantMarkers(office: Office): void {
   clearRestaurantMarkers();
+  const venues = currentMode === 'lunch' ? office.restaurants : (office.borrelVenues ?? []);
 
-  office.restaurants.forEach((restaurant, i) => {
+  venues.forEach((restaurant, i) => {
     const icon = L.divIcon({
       className: '',
       html: `
@@ -178,17 +213,19 @@ function makeBars(filled: number, colorClass: string): string {
 
 function renderRestaurantCards(office: Office): void {
   restaurantList.innerHTML = '';
+  const config = modeConfig[currentMode];
+  const venues = currentMode === 'lunch' ? office.restaurants : (office.borrelVenues ?? []);
 
-  if (office.restaurants.length === 0) {
+  if (venues.length === 0) {
     restaurantList.innerHTML = `
       <div class="no-restaurants">
-        <div class="no-restaurants-icon">🍽️</div>
-        <p class="no-restaurants-text">Aanbevelingen voor dit kantoor volgen binnenkort.</p>
+        <div class="no-restaurants-icon">${config.emptyIcon}</div>
+        <p class="no-restaurants-text">${config.emptyText}</p>
       </div>`;
     return;
   }
 
-  office.restaurants.forEach((r, i) => {
+  venues.forEach((r, i) => {
     const busyFilled = r.busynessLevel === 'quiet' ? 1 : r.busynessLevel === 'medium' ? 2 : 3;
     const priceFilled = (r.price.match(/€/g) ?? []).length;
 
@@ -223,7 +260,7 @@ function renderRestaurantCards(office: Office): void {
           <svg class="meta-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
           </svg>
-          <span><span class="meta-label">Eettip</span><span class="meta-value">${r.recommend}</span></span>
+          <span><span class="meta-label">${config.venueLabel}</span><span class="meta-value">${r.recommend}</span></span>
         </div>
       </div>
     `;
@@ -249,8 +286,52 @@ function renderOfficeList(): void {
   });
 }
 
+// ─── Mode switching ───────────────────────────────────────────────────
+function switchMode(mode: Mode): void {
+  currentMode = mode;
+  const config = modeConfig[mode];
+
+  // Title + tab
+  document.querySelector<HTMLElement>('.site-title')!.textContent = config.title;
+  document.title = config.title;
+
+  // Tile layer
+  tileLayer.remove();
+  tileLayer = L.tileLayer(config.tileUrl, {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19,
+  }).addTo(map);
+
+  // Dark theme
+  document.getElementById('app')!.classList.toggle('borrel-mode', mode === 'borrel');
+
+  // Toggle button states
+  document.querySelectorAll<HTMLElement>('.mode-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.mode === mode);
+  });
+
+  // Suggest button text
+  document.querySelectorAll<HTMLElement>('.suggest-btn-text').forEach((el) => {
+    el.textContent = config.suggestBtnText;
+  });
+
+  // Go back to office list if in restaurant view
+  if (restaurantPanel.classList.contains('visible')) goBack();
+}
+
 // ─── Suggest modal ────────────────────────────────────────────────────
 function openSuggestModal(preselectedOfficeId?: string): void {
+  const config = modeConfig[currentMode];
+
+  // Update form labels and modal title
+  document.querySelector<HTMLElement>('.modal-title')!.textContent = config.modalTitle;
+  document.getElementById('label-suggest-name')!.textContent = config.formNameLabel;
+  document.getElementById('label-suggest-queue')!.textContent = config.formQueueLabel;
+  document.getElementById('label-suggest-price')!.textContent = config.formPriceLabel;
+  document.getElementById('label-suggest-why')!.textContent = config.formWhyLabel;
+  (document.getElementById('suggest-mode') as HTMLInputElement).value = currentMode;
+
   // Populate office dropdown
   officeSelect.innerHTML = '<option value="">Kies een kantoor…</option>';
   offices.forEach((office) => {
@@ -308,5 +389,8 @@ suggestForm.addEventListener('submit', async (e) => {
 
 // ─── Boot ─────────────────────────────────────────────────────────────
 backBtn.addEventListener('click', goBack);
+document.querySelectorAll<HTMLElement>('.mode-btn').forEach((btn) => {
+  btn.addEventListener('click', () => switchMode(btn.dataset.mode as Mode));
+});
 renderOfficeList();
 initMap();
