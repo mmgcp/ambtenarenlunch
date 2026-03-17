@@ -240,7 +240,8 @@ html, body {
 }
 
 .card-name {
-  font-family: var(--font-type);
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: 1.05rem;
   color: var(--text);
   line-height: 1.3;
