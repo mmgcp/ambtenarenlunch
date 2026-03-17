@@ -605,4 +605,8 @@ html, body {
     margin-left: 16px !important;
     margin-bottom: calc(50vh + 8px) !important;
   }
+
+  .office-btn-address {
+    display: none;
+  }
 }
