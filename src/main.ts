@@ -404,8 +404,8 @@ suggestForm.addEventListener('submit', async (e) => {
 window.addEventListener('resize', updateTagline);
 updateTagline();
 backBtn.addEventListener('click', goBack);
-document.querySelectorAll<HTMLElement>('.mode-btn').forEach((btn) => {
-  btn.addEventListener('click', () => switchMode(btn.dataset.mode as Mode));
+document.querySelector<HTMLElement>('.mode-toggle')!.addEventListener('click', () => {
+  switchMode(currentMode === 'lunch' ? 'borrel' : 'lunch');
 });
 renderOfficeList();
 initMap();
