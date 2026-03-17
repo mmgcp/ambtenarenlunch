@@ -69,10 +69,12 @@ html, body {
 }
 
 .site-tagline {
-  margin-top: 5px;
-  font-size: 0.78rem;
+  margin-top: 10px;
+  padding-left: 10px;
+  border-left: 2.5px solid var(--red);
+  font-size: 0.76rem;
   color: var(--warm-gray);
-  font-style: italic;
+  line-height: 1.6;
 }
 
 /* ─── Office selector ────────────────────────────────────────────── */
