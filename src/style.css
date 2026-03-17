@@ -1,0 +1,461 @@
+/* ─── Design Tokens ──────────────────────────────────────────────── */
+:root {
+  --red:        #C41E3A;
+  --red-light:  #f5e8eb;
+  --cream:      #faf7f2;
+  --warm-gray:  #7a736c;
+  --text:       #2a2520;
+  --card-bg:    #ffffff;
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.08);
+  --shadow-md:  0 4px 24px rgba(0,0,0,0.13);
+  --radius:     14px;
+  --radius-sm:  8px;
+  --font-type:  'Special Elite', 'Courier New', monospace;
+  --font-body:  'Inter', system-ui, sans-serif;
+  --panel-w:    360px;
+}
+
+/* ─── Reset & Base ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--text);
+  overflow: hidden;
+}
+
+/* ─── Layout ─────────────────────────────────────────────────────── */
+#app {
+  display: flex;
+  height: 100vh;
+  position: relative;
+}
+
+#map {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* ─── Panel (shared) ─────────────────────────────────────────────── */
+.panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--panel-w);
+  height: 100%;
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  box-shadow: var(--shadow-md);
+}
+
+/* ─── Panel Header ───────────────────────────────────────────────── */
+.panel-header {
+  padding: 28px 24px 20px;
+  border-bottom: 1px solid #ece8e1;
+  flex-shrink: 0;
+}
+
+.site-title {
+  font-family: var(--font-type);
+  font-size: 1.65rem;
+  color: var(--text);
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+.site-tagline {
+  margin-top: 5px;
+  font-size: 0.78rem;
+  color: var(--warm-gray);
+  font-style: italic;
+}
+
+/* ─── Office selector ────────────────────────────────────────────── */
+.panel-label {
+  padding: 18px 24px 10px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  flex-shrink: 0;
+}
+
+#office-list {
+  overflow-y: auto;
+  flex: 1;
+  padding: 0 16px 24px;
+}
+
+.office-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  background: var(--card-bg);
+  border: 1.5px solid #e8e2d9;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.18s, box-shadow 0.18s, transform 0.12s;
+  font-family: var(--font-body);
+}
+
+.office-btn:hover {
+  border-color: var(--red);
+  box-shadow: var(--shadow-sm);
+  transform: translateX(3px);
+}
+
+.office-btn:active { transform: translateX(0); }
+
+.office-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--red);
+  flex-shrink: 0;
+}
+
+.office-btn-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.office-btn-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+.office-btn-address {
+  font-size: 0.74rem;
+  color: var(--warm-gray);
+}
+
+/* ─── Restaurant panel ───────────────────────────────────────────── */
+#restaurant-panel {
+  display: none;
+}
+
+#restaurant-panel.visible {
+  display: flex;
+}
+
+#restaurant-panel .panel-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--warm-gray);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font-body);
+  transition: color 0.15s;
+  width: fit-content;
+}
+
+.back-btn:hover { color: var(--red); }
+
+.back-btn svg { transition: transform 0.15s; }
+.back-btn:hover svg { transform: translateX(-2px); }
+
+.office-heading {
+  font-family: var(--font-type);
+  font-size: 1.3rem;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.office-heading-address {
+  font-size: 0.74rem;
+  color: var(--warm-gray);
+}
+
+/* ─── Restaurant list ────────────────────────────────────────────── */
+#restaurant-list {
+  overflow-y: auto;
+  flex: 1;
+  padding: 12px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ─── Restaurant card ────────────────────────────────────────────── */
+.restaurant-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1.5px solid #e8e2d9;
+  padding: 16px;
+  cursor: pointer;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  animation: slideUp 0.32s ease both;
+}
+
+.restaurant-card:nth-child(1) { animation-delay: 0.04s; }
+.restaurant-card:nth-child(2) { animation-delay: 0.10s; }
+.restaurant-card:nth-child(3) { animation-delay: 0.17s; }
+.restaurant-card:nth-child(4) { animation-delay: 0.24s; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.restaurant-card:hover {
+  border-color: var(--red);
+  box-shadow: var(--shadow-sm);
+}
+
+.restaurant-card.selected {
+  border-color: var(--red);
+  box-shadow: var(--shadow-md);
+  background: #fffaf8;
+}
+
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.card-name {
+  font-family: var(--font-type);
+  font-size: 1.05rem;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.card-price {
+  font-family: var(--font-type);
+  font-size: 0.82rem;
+  color: var(--red);
+  white-space: nowrap;
+  padding: 2px 9px;
+  background: var(--red-light);
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+.card-address {
+  font-size: 0.72rem;
+  color: var(--warm-gray);
+  margin-bottom: 6px;
+  opacity: 0.7;
+}
+
+.card-description {
+  font-size: 0.82rem;
+  color: var(--warm-gray);
+  line-height: 1.58;
+  margin-bottom: 12px;
+}
+
+.card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid #f0ebe4;
+  padding-top: 11px;
+}
+
+.meta-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.77rem;
+  line-height: 1.4;
+}
+
+.meta-icon {
+  flex-shrink: 0;
+  color: var(--warm-gray);
+  margin-top: 1px;
+}
+
+.meta-label {
+  font-weight: 600;
+  color: var(--text);
+  margin-right: 3px;
+}
+
+.meta-value { color: var(--warm-gray); }
+
+/* Bar indicators */
+.meta-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  margin-left: 4px;
+}
+
+.meta-bar {
+  width: 7px;
+  border-radius: 2px;
+  background: #e0dbd4;
+}
+
+.meta-bar:nth-child(1) { height: 8px; }
+.meta-bar:nth-child(2) { height: 11px; }
+.meta-bar:nth-child(3) { height: 14px; }
+
+.busy-quiet  .meta-bar.filled { background: #3a7d44; }
+.busy-medium .meta-bar.filled { background: #b8760a; }
+.busy-busy   .meta-bar.filled { background: #c41e3a; }
+
+.price .meta-bar.filled { background: var(--warm-gray); }
+
+/* ─── Custom map marker ──────────────────────────────────────────── */
+.office-marker-icon {
+  background: var(--red);
+  border: 3px solid white;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.office-marker-icon.selected {
+  background: var(--text);
+}
+
+.restaurant-marker-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.restaurant-marker-label {
+  background: white;
+  border: 1.5px solid var(--red);
+  border-radius: var(--radius-sm);
+  padding: 4px 9px;
+  font-size: 0.68rem;
+  font-family: var(--font-type);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+  animation: popIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.restaurant-marker-label.selected {
+  background: var(--red);
+  color: white;
+  border-color: var(--red);
+}
+
+.restaurant-marker-pin {
+  width: 1.5px;
+  height: 6px;
+  background: var(--red);
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ─── Leaflet overrides ──────────────────────────────────────────── */
+.leaflet-control-zoom {
+  border: none !important;
+  box-shadow: var(--shadow-sm) !important;
+  margin-left: calc(var(--panel-w) + 16px) !important;
+}
+
+.leaflet-control-zoom a {
+  border-radius: var(--radius-sm) !important;
+  border: 1.5px solid #e8e2d9 !important;
+  color: var(--text) !important;
+  font-weight: 500 !important;
+  background: white !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: var(--red-light) !important;
+  border-color: var(--red) !important;
+  color: var(--red) !important;
+}
+
+.leaflet-control-attribution {
+  margin-left: calc(var(--panel-w)) !important;
+  font-size: 0.65rem !important;
+  background: rgba(255,255,255,0.7) !important;
+}
+
+/* ─── No restaurants placeholder ────────────────────────────────── */
+.no-restaurants {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  gap: 12px;
+  text-align: center;
+}
+
+.no-restaurants-icon {
+  font-size: 2rem;
+  opacity: 0.35;
+}
+
+.no-restaurants-text {
+  font-size: 0.84rem;
+  color: var(--warm-gray);
+  font-style: italic;
+  line-height: 1.55;
+}
+
+/* ─── Scrollbars ─────────────────────────────────────────────────── */
+#office-list::-webkit-scrollbar,
+#restaurant-list::-webkit-scrollbar { width: 4px; }
+#office-list::-webkit-scrollbar-track,
+#restaurant-list::-webkit-scrollbar-track { background: transparent; }
+#office-list::-webkit-scrollbar-thumb,
+#restaurant-list::-webkit-scrollbar-thumb {
+  background: #d9d2c8;
+  border-radius: 4px;
+}
+
+/* ─── Mobile ─────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  :root { --panel-w: 100vw; }
+
+  .panel {
+    height: 50vh;
+    top: auto;
+    bottom: 0;
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.13);
+  }
+
+  #map {
+    height: 50vh;
+    bottom: auto;
+    top: 0;
+  }
+
+  .leaflet-control-zoom {
+    margin-left: 16px !important;
+    margin-bottom: calc(50vh + 8px) !important;
+  }
+}

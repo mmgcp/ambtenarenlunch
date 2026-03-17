@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/opt/homebrew/bin/npx tsc:*)",
+      "WebFetch(domain:mapcarta.com)",
+      "WebSearch"
+    ]
+  }
+}

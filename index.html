@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ambtenarenlunch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <div id="app">
+    <!-- Office selector panel -->
+    <div id="office-panel" class="panel">
+      <div class="panel-header">
+        <h1 class="site-title">Ambtenarenlunch</h1>
+        <p class="site-tagline">Eet lekker, ook als ambtenaar.</p>
+      </div>
+      <p class="panel-label">Kies je kantoor</p>
+      <div id="office-list"></div>
+    </div>
+
+    <!-- Restaurant panel (hidden by default) -->
+    <div id="restaurant-panel" class="panel">
+      <div class="panel-header">
+        <button class="back-btn" id="back-btn">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Alle kantoren
+        </button>
+        <h2 class="office-heading" id="panel-office-name"></h2>
+        <p class="office-heading-address" id="panel-office-address"></p>
+      </div>
+      <div id="restaurant-list"></div>
+    </div>
+
+    <!-- Map -->
+    <div id="map"></div>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
