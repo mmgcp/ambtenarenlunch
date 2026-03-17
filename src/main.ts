@@ -9,6 +9,7 @@ type Mode = 'lunch' | 'borrel';
 const modeConfig = {
   lunch: {
     title: 'Ambtenarenlunch',
+    tagline: 'Het is belangrijk goed te eten, ook als ambtenaar! Deze tool is gemaakt om je op de hoogte te houden van de beste lunchtentjes in de buurt van elk gemeente kantoor. Doe suggesties en draag bij aan de lunchervaring van je collega\'s.',
     tileUrl: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
     modalTitle: 'Stel een lunchplek voor',
     suggestBtnText: 'Stel een lunchplek voor',
@@ -22,6 +23,7 @@ const modeConfig = {
   },
   borrel: {
     title: 'Ambtenarenborrel',
+    tagline: 'Een goede borrel begint bij de juiste kroeg. Deze tool helpt je de beste cafés en terrassen te vinden in de buurt van elk gemeente kantoor. Doe suggesties en draag bij aan de borrelervaring van je collega\'s.',
     tileUrl: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
     modalTitle: 'Stel een café voor',
     suggestBtnText: 'Stel een café voor',
@@ -291,8 +293,9 @@ function switchMode(mode: Mode): void {
   currentMode = mode;
   const config = modeConfig[mode];
 
-  // Title + tab
+  // Title, tagline + tab
   document.querySelector<HTMLElement>('.site-title')!.textContent = config.title;
+  document.querySelector<HTMLElement>('.site-tagline')!.textContent = config.tagline;
   document.title = config.title;
 
   // Tile layer
