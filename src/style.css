@@ -352,7 +352,8 @@ html, body {
   border-radius: var(--radius-sm);
   padding: 4px 9px;
   font-size: 0.68rem;
-  font-family: var(--font-type);
+  font-family: var(--font-body);
+  font-weight: 600;
   color: var(--text);
   box-shadow: var(--shadow-sm);
   white-space: nowrap;
