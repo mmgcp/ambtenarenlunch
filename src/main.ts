@@ -1,7 +1,7 @@
 import 'leaflet/dist/leaflet.css';
 import './style.css';
 import L from 'leaflet';
-import { offices, type Office, type Restaurant } from './data';
+import { offices, type Office } from './data';
 
 // ─── State ───────────────────────────────────────────────────────────
 let map: L.Map;
