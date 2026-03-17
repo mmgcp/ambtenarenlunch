@@ -141,6 +141,7 @@ html, body {
 .office-btn-address {
   font-size: 0.74rem;
   color: var(--warm-gray);
+  display: none;
 }
 
 /* ─── Restaurant panel ───────────────────────────────────────────── */
@@ -608,7 +609,6 @@ html, body {
     margin-bottom: calc(50vh + 8px) !important;
   }
 
-  .office-btn-address,
   .office-heading-address {
     display: none;
   }
