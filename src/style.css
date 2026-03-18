@@ -349,6 +349,14 @@ html, body {
   box-shadow: none;
 }
 
+.borrel-mode .office-marker-icon {
+  background: #1a3a6b;
+}
+
+.borrel-mode .office-marker-icon.selected {
+  background: #1a3a6b;
+}
+
 .restaurant-marker-wrap {
   display: flex;
   flex-direction: column;
