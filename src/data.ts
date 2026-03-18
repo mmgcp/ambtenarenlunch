@@ -28,7 +28,8 @@ export interface Office {
 // ✓ Nominatim/OSM geocoded
 // ~ Estimated from postcode / agent research / Amsterdam geography
 export const offices: Office[] = [
-  // ─── Achtergracht 4-22 ── NEW ───────────────────────────────────
+
+  // ─── Achtergracht 4-22 ───────────────────────────────────────────
   {
     id: 'achtergracht',
     name: 'Achtergracht',
@@ -39,7 +40,51 @@ export const offices: Office[] = [
     restaurants: [],
   },
 
-  // ─── Amstel 1 ── existing ────────────────────────────────────────
+  // ─── Burgerweeshuispad 54 ────────────────────────────────────────
+  {
+    id: 'burgerweeshuispad',
+    name: 'Burgerweeshuispad',
+    address: 'Burgerweeshuispad 54, Zuidas',
+    lat: 52.3400,  // ✓ Nominatim
+    lng: 4.8541,
+    zoom: 16,
+    restaurants: [],
+  },
+
+  // ─── Cruquiusweg 5 ───────────────────────────────────────────────
+  {
+    id: 'cruquiusweg5',
+    name: 'Cruquiusweg 5',
+    address: 'Cruquiusweg 5, Oost',
+    lat: 52.3713,  // ✓ Nominatim
+    lng: 4.9543,
+    zoom: 16,
+    restaurants: [],
+  },
+
+  // ─── Daniel Goedkoopstraat 7-9 ───────────────────────────────────
+  {
+    id: 'danielgoedkoop',
+    name: 'Daniel Goedkoopstraat',
+    address: 'Daniel Goedkoopstraat 7–9, Zuid',
+    lat: 52.3354,  // ✓ Nominatim
+    lng: 4.9206,
+    zoom: 16,
+    restaurants: [],
+  },
+
+  // ─── De Entree 300 ───────────────────────────────────────────────
+  {
+    id: 'deentree',
+    name: 'De Entree 300',
+    address: 'De Entree 300, Zuidoost',
+    lat: 52.3105,  // ✓ Nominatim
+    lng: 4.9394,
+    zoom: 16,
+    restaurants: [],
+  },
+
+  // ─── Amstel 1 ────────────────────────────────────────────────────
   {
     id: 'amstel1',
     name: 'de Stopera',
@@ -161,127 +206,156 @@ export const offices: Office[] = [
     ],
   },
 
-  // ─── Anton de Komplein 150 ── existing ──────────────────────────
+  // ─── Entrada 600 ─────────────────────────────────────────────────
+  // Confirmed as "Entrada 600", postcode 1114 AA, Amsterdam-Duivendrecht
   {
-    id: 'antonkomplein',
-    name: 'Stadsloket Zuidoost',
-    address: 'Anton de Komplein 150, Zuidoost',
-    lat: 52.3162,  // ✓ Nominatim
-    lng: 4.9565,
+    id: 'entrade600',
+    name: 'Entrada 600',
+    address: 'Entrada 600, Duivendrecht',
+    lat: 52.3120,  // ~ postcode 1114 AA, Duivendrecht
+    lng: 4.9450,
+    zoom: 16,
+    restaurants: [],
+  },
+
+  // ─── Jan van Galenstraat 323 ─────────────────────────────────────
+  {
+    id: 'janvangalen',
+    name: 'Jan van Galenstraat',
+    address: 'Jan van Galenstraat 323, West',
+    lat: 52.3710,  // ~ agent research
+    lng: 4.8606,
+    zoom: 16,
+    restaurants: [],
+  },
+
+  // ─── Klaprozenweg 91 ─────────────────────────────────────────────
+  {
+    id: 'klaprozenweg',
+    name: 'Klaprozenweg',
+    address: 'Klaprozenweg 91, Noord',
+    lat: 52.4036,  // ~ agent research
+    lng: 4.8830,
+    zoom: 15,
+    restaurants: [],
+  },
+
+  // ─── Nieuwe Achtergracht 100 ─────────────────────────────────────
+  {
+    id: 'nieuweachtergracht',
+    name: 'Nieuwe Achtergracht',
+    address: 'Nieuwe Achtergracht 100, Centrum',
+    lat: 52.3620,  // ~ agent research / UvA area
+    lng: 4.9100,
+    zoom: 16,
+    restaurants: [],
+  },
+
+  // ─── Nieuwstraat 41 (Weesp) ──────────────────────────────────────
+  {
+    id: 'weesp41',
+    name: 'Nieuwstraat 41 (Weesp)',
+    address: 'Nieuwstraat 41, Weesp',
+    lat: 52.3092,  // ~ Weesp city centre
+    lng: 5.0420,
+    zoom: 16,
+    restaurants: [],
+  },
+
+  // ─── Plein '40-'45 nr.1 ──────────────────────────────────────────
+  {
+    id: 'plein4045',
+    name: "Plein '40-'45",
+    address: "Plein '40-'45 nr.1, Nieuw-West",
+    lat: 52.3710,  // ~ Slotervaart / Nieuw-West
+    lng: 4.8490,
+    zoom: 16,
+    restaurants: [],
+  },
+
+  // ─── Vijzelstraat 32 (Herengracht 482) ───────────────────────────
+  {
+    id: 'vijzelstraat',
+    name: 'Stadsarchief',
+    address: 'Vijzelstraat 32 / Herengracht 482, Centrum',
+    lat: 52.3647,  // ~ De Bazel building, Vijzelstraat
+    lng: 4.8966,
+    zoom: 16,
+    restaurants: [],
+  },
+
+  // ─── Oudezijds Voorburgwal 300 ───────────────────────────────────
+  {
+    id: 'oudezijds',
+    name: 'Stadsbank van Leningen',
+    address: 'Oudezijds Voorburgwal 300, Centrum',
+    lat: 52.3716,  // ~ Centrum, UvA/OV area
+    lng: 4.8963,
+    zoom: 16,
+    restaurants: [],
+  },
+
+  // ─── Osdorpplein 946 ─────────────────────────────────────────────
+  {
+    id: 'osdorpplein',
+    name: 'Stadsloket Nieuw-West',
+    address: 'Osdorpplein 946, Nieuw-West',
+    lat: 52.3581,  // ✓ Nominatim
+    lng: 4.8054,
     zoom: 16,
     restaurants: [
       {
-        name: 'Oma Ietje',
-        address: 'Heesterveld 3',
-        description: 'Bar-restaurant en ontmoetingsplek in Zuidoost met lunch van 11–15:30. Lokaal, laagdrempelig en gezellig.',
-        walkingTime: 5,
+        name: 'Sallora',
+        address: 'Osdorpplein 1010',
+        description: 'Frans-Libanees restaurant op het Osdorpplein. Verfijnd en verrassend voor het plein.',
+        walkingTime: 2,
         busyness: 'Rustig op weekdagen',
         busynessLevel: 'quiet',
-        recommend: 'Dagmenu of soep met brood',
-        price: '€',
-        lat: 52.3170,
-        lng: 4.9570,
+        recommend: 'Mezze of salade Libanaise',
+        price: '€€',
+        lat: 52.3578,
+        lng: 4.8065,
       },
       {
-        name: 'Lebkov & Sons Bijlmer',
-        address: 'Hoekenrode 6',
-        description: 'Specialty koffie, verse sandwiches en salades vlakbij Bijlmer Arena metro. Snel en kwalitatief.',
-        walkingTime: 10,
-        busyness: 'Druk in de ochtend en middag',
+        name: 'Westmarket',
+        address: 'Osdorpplein 736',
+        description: 'Indoor food market met wereldkeukens — Aziatisch streetfood, Midden-Oosters en meer. Elke dag open.',
+        walkingTime: 3,
+        busyness: 'Wisselend per kraam',
         busynessLevel: 'medium',
-        recommend: 'Sandwich van de dag of salade',
-        price: '€€',
-        lat: 52.3143,
-        lng: 4.9518,
+        recommend: 'Kies zelf — elke kraam heeft z\'n specialiteit',
+        price: '€ / €€',
+        lat: 52.3581,
+        lng: 4.8072,
       },
       {
-        name: 'Brasserie Hoekenrode',
-        address: 'Hoekenrode 2',
-        description: 'Grand café bij de Johan Cruyff Arena. Ruime brasserie met internationale kaart, open op weekdagen.',
-        walkingTime: 11,
-        busyness: 'Rustig op werkdagen',
-        busynessLevel: 'quiet',
-        recommend: 'Burger of dagschotel',
-        price: '€€',
-        lat: 52.3143,
-        lng: 4.9516,
-      },
-      {
-        name: 'The Traveller',
-        address: 'Bijlmerdreef 108',
-        description: 'Wereldkeuken restaurant open voor lunch en diner. Multiculturele sfeer, groot terras.',
-        walkingTime: 8,
-        busyness: 'Rustig overdag',
-        busynessLevel: 'quiet',
-        recommend: 'Dagsuggestie of rijstgerecht',
-        price: '€',
-        lat: 52.3155,
-        lng: 4.9497,
-      },
-    ],
-  },
-
-  // ─── Bos en Lommerplein 250 ── existing ─────────────────────────
-  {
-    id: 'boslommer',
-    name: 'Stadsloket West',
-    address: 'Bos en Lommerplein 250, West',
-    lat: 52.3781,  // ✓ Nominatim
-    lng: 4.8453,
-    zoom: 16,
-    restaurants: [
-      {
-        name: 'Florya Restaurant & Café',
-        address: 'Bos en Lommerplantsoen 10',
-        description: 'Turks-mediterraan restaurant aan het plantsoen. Heerlijke mezze in een groene omgeving.',
-        walkingTime: 4,
-        busyness: 'Rustig na 13u',
-        busynessLevel: 'quiet',
-        recommend: 'Mezze-bord of kebab van de dag',
-        price: '€€',
-        lat: 52.3753,
-        lng: 4.8460,
-      },
-      {
-        name: 'Samen Lunch & Juices',
-        address: 'Bos en Lommerweg 72',
-        description: 'Gezonde bowls, sandwiches en verse sappen. Licht en snel voor wie bewust bezig is.',
-        walkingTime: 7,
+        name: 'Coffee Blends',
+        address: 'Tussen Meer 52',
+        description: 'Café in het Osdorpplein-winkelcentrum met lunch. Goed voor een snelle, betaalbare hap.',
+        walkingTime: 5,
         busyness: 'Rustig',
         busynessLevel: 'quiet',
-        recommend: 'Bowl van de dag of verse smoothie',
+        recommend: 'Tosti of dagsandwich',
         price: '€',
-        lat: 52.3826,
-        lng: 4.8556,
+        lat: 52.3570,
+        lng: 4.8118,
       },
       {
-        name: 'Bistro Bos',
-        address: 'Bos en Lommerweg 77',
-        description: 'Turks culinaire bistro tegenover Samen. Dagverse gerechten in een warme omgeving.',
-        walkingTime: 7,
-        busyness: 'Druk 12–13u',
-        busynessLevel: 'medium',
-        recommend: 'Dagsuggestie of turks brood met dips',
-        price: '€',
-        lat: 52.3825,
-        lng: 4.8554,
-      },
-      {
-        name: 'Patel Cafe',
-        address: 'Bos en Lommerplein 250',
-        description: 'In hetzelfde pand als het stadsloket. Niet makkelijker te bereiken — snelle lunch zonder omweg.',
-        walkingTime: 1,
-        busyness: 'Wisselend',
-        busynessLevel: 'medium',
-        recommend: 'Broodje of koffie met iets erbij',
-        price: '€',
-        lat: 52.3781,
-        lng: 4.8453,
+        name: 'Red Elephant Thai Food',
+        address: 'Slotermeerlaan (Sloterplas)',
+        description: 'Thais restaurant met uitzicht op de Sloterplas. Rustig en een welkome verrassing in Nieuw-West.',
+        walkingTime: 12,
+        busyness: 'Rustig',
+        busynessLevel: 'quiet',
+        recommend: 'Pad thai of groene curry',
+        price: '€€',
+        lat: 52.3625,
+        lng: 4.8203,
       },
     ],
   },
 
-  // ─── Buikslotermeerplein 2000 ── existing ───────────────────────
+  // ─── Buikslotermeerplein 2000 ────────────────────────────────────
   {
     id: 'buikslotermeer',
     name: 'Stadsloket Noord',
@@ -341,107 +415,7 @@ export const offices: Office[] = [
     ],
   },
 
-  // ─── Burgerweeshuispad 54 ── NEW ─────────────────────────────────
-  {
-    id: 'burgerweeshuispad',
-    name: 'Burgerweeshuispad',
-    address: 'Burgerweeshuispad 54, Zuidas',
-    lat: 52.3400,  // ✓ Nominatim
-    lng: 4.8541,
-    zoom: 16,
-    restaurants: [],
-  },
-
-  // ─── Cruquiusweg 5 ── NEW ────────────────────────────────────────
-  {
-    id: 'cruquiusweg5',
-    name: 'Cruquiusweg 5',
-    address: 'Cruquiusweg 5, Oost',
-    lat: 52.3713,  // ✓ Nominatim
-    lng: 4.9543,
-    zoom: 16,
-    restaurants: [],
-  },
-
-  // ─── Daniel Goedkoopstraat 7-9 ── NEW ───────────────────────────
-  {
-    id: 'danielgoedkoop',
-    name: 'Daniel Goedkoopstraat',
-    address: 'Daniel Goedkoopstraat 7–9, Zuid',
-    lat: 52.3354,  // ✓ Nominatim
-    lng: 4.9206,
-    zoom: 16,
-    restaurants: [],
-  },
-
-  // ─── De Entree 300 ── NEW ────────────────────────────────────────
-  {
-    id: 'deentree',
-    name: 'De Entree 300',
-    address: 'De Entree 300, Zuidoost',
-    lat: 52.3105,  // ✓ Nominatim
-    lng: 4.9394,
-    zoom: 16,
-    restaurants: [],
-  },
-
-  // ─── Entrade 600 ── NEW ─────────────────────────────────────────
-  // Confirmed as "Entrada 600", postcode 1114 AA, Amsterdam-Duivendrecht
-  {
-    id: 'entrade600',
-    name: 'Entrada 600',
-    address: 'Entrada 600, Duivendrecht',
-    lat: 52.3120,  // ~ postcode 1114 AA, Duivendrecht
-    lng: 4.9450,
-    zoom: 16,
-    restaurants: [],
-  },
-
-  // ─── Jan van Galenstraat 323 ── NEW ─────────────────────────────
-  {
-    id: 'janvangalen',
-    name: 'Jan van Galenstraat',
-    address: 'Jan van Galenstraat 323, West',
-    lat: 52.3710,  // ~ agent research
-    lng: 4.8606,
-    zoom: 16,
-    restaurants: [],
-  },
-
-  // ─── Klaprozenweg 91 ── NEW ──────────────────────────────────────
-  {
-    id: 'klaprozenweg',
-    name: 'Klaprozenweg',
-    address: 'Klaprozenweg 91, Noord',
-    lat: 52.4036,  // ~ agent research
-    lng: 4.8830,
-    zoom: 15,
-    restaurants: [],
-  },
-
-  // ─── Nieuwe Achtergracht 100 ── NEW ─────────────────────────────
-  {
-    id: 'nieuweachtergracht',
-    name: 'Nieuwe Achtergracht',
-    address: 'Nieuwe Achtergracht 100, Centrum',
-    lat: 52.3620,  // ~ agent research / UvA area
-    lng: 4.9100,
-    zoom: 16,
-    restaurants: [],
-  },
-
-  // ─── Nieuwstraat 41 (Weesp) ── NEW ──────────────────────────────
-  {
-    id: 'weesp41',
-    name: 'Nieuwstraat 41 (Weesp)',
-    address: 'Nieuwstraat 41, Weesp',
-    lat: 52.3092,  // ~ Weesp city centre
-    lng: 5.0420,
-    zoom: 16,
-    restaurants: [],
-  },
-
-  // ─── Oranje-Vrijstaatplein 2 ── existing ────────────────────────
+  // ─── Oranje-Vrijstaatplein 2 ─────────────────────────────────────
   {
     id: 'oranjevrijstaat',
     name: 'Stadsloket Oost',
@@ -539,89 +513,67 @@ export const offices: Office[] = [
     ],
   },
 
-  // ─── Osdorpplein 946 ── existing ────────────────────────────────
+  // ─── Bos en Lommerplein 250 ──────────────────────────────────────
   {
-    id: 'osdorpplein',
-    name: 'Stadsloket Nieuw-West',
-    address: 'Osdorpplein 946, Nieuw-West',
-    lat: 52.3581,  // ✓ Nominatim
-    lng: 4.8054,
+    id: 'boslommer',
+    name: 'Stadsloket West',
+    address: 'Bos en Lommerplein 250, West',
+    lat: 52.3781,  // ✓ Nominatim
+    lng: 4.8453,
     zoom: 16,
     restaurants: [
       {
-        name: 'Sallora',
-        address: 'Osdorpplein 1010',
-        description: 'Frans-Libanees restaurant op het Osdorpplein. Verfijnd en verrassend voor het plein.',
-        walkingTime: 2,
-        busyness: 'Rustig op weekdagen',
+        name: 'Florya Restaurant & Café',
+        address: 'Bos en Lommerplantsoen 10',
+        description: 'Turks-mediterraan restaurant aan het plantsoen. Heerlijke mezze in een groene omgeving.',
+        walkingTime: 4,
+        busyness: 'Rustig na 13u',
         busynessLevel: 'quiet',
-        recommend: 'Mezze of salade Libanaise',
+        recommend: 'Mezze-bord of kebab van de dag',
         price: '€€',
-        lat: 52.3578,
-        lng: 4.8065,
+        lat: 52.3753,
+        lng: 4.8460,
       },
       {
-        name: 'Westmarket',
-        address: 'Osdorpplein 736',
-        description: 'Indoor food market met wereldkeukens — Aziatisch streetfood, Midden-Oosters en meer. Elke dag open.',
-        walkingTime: 3,
-        busyness: 'Wisselend per kraam',
-        busynessLevel: 'medium',
-        recommend: 'Kies zelf — elke kraam heeft z\'n specialiteit',
-        price: '€ / €€',
-        lat: 52.3581,
-        lng: 4.8072,
-      },
-      {
-        name: 'Coffee Blends',
-        address: 'Tussen Meer 52',
-        description: 'Café in het Osdorpplein-winkelcentrum met lunch. Goed voor een snelle, betaalbare hap.',
-        walkingTime: 5,
+        name: 'Samen Lunch & Juices',
+        address: 'Bos en Lommerweg 72',
+        description: 'Gezonde bowls, sandwiches en verse sappen. Licht en snel voor wie bewust bezig is.',
+        walkingTime: 7,
         busyness: 'Rustig',
         busynessLevel: 'quiet',
-        recommend: 'Tosti of dagsandwich',
+        recommend: 'Bowl van de dag of verse smoothie',
         price: '€',
-        lat: 52.3570,
-        lng: 4.8118,
+        lat: 52.3826,
+        lng: 4.8556,
       },
       {
-        name: 'Red Elephant Thai Food',
-        address: 'Slotermeerlaan (Sloterplas)',
-        description: 'Thais restaurant met uitzicht op de Sloterplas. Rustig en een welkome verrassing in Nieuw-West.',
-        walkingTime: 12,
-        busyness: 'Rustig',
-        busynessLevel: 'quiet',
-        recommend: 'Pad thai of groene curry',
-        price: '€€',
-        lat: 52.3625,
-        lng: 4.8203,
+        name: 'Bistro Bos',
+        address: 'Bos en Lommerweg 77',
+        description: 'Turks culinaire bistro tegenover Samen. Dagverse gerechten in een warme omgeving.',
+        walkingTime: 7,
+        busyness: 'Druk 12–13u',
+        busynessLevel: 'medium',
+        recommend: 'Dagsuggestie of turks brood met dips',
+        price: '€',
+        lat: 52.3825,
+        lng: 4.8554,
+      },
+      {
+        name: 'Patel Cafe',
+        address: 'Bos en Lommerplein 250',
+        description: 'In hetzelfde pand als het stadsloket. Niet makkelijker te bereiken — snelle lunch zonder omweg.',
+        walkingTime: 1,
+        busyness: 'Wisselend',
+        busynessLevel: 'medium',
+        recommend: 'Broodje of koffie met iets erbij',
+        price: '€',
+        lat: 52.3781,
+        lng: 4.8453,
       },
     ],
   },
 
-  // ─── Oudezijds Voorburgwal 300 ── NEW ───────────────────────────
-  {
-    id: 'oudezijds',
-    name: 'Stadsbank van Leningen',
-    address: 'Oudezijds Voorburgwal 300, Centrum',
-    lat: 52.3716,  // ~ Centrum, UvA/OV area
-    lng: 4.8963,
-    zoom: 16,
-    restaurants: [],
-  },
-
-  // ─── Plein '40-'45 nr.1 ── NEW ──────────────────────────────────
-  {
-    id: 'plein4045',
-    name: "Plein '40-'45",
-    address: "Plein '40-'45 nr.1, Nieuw-West",
-    lat: 52.3710,  // ~ Slotervaart / Nieuw-West
-    lng: 4.8490,
-    zoom: 16,
-    restaurants: [],
-  },
-
-  // ─── President Kennedylaan 923 ── existing ───────────────────────
+  // ─── President Kennedylaan 923 ───────────────────────────────────
   {
     id: 'kennedylaan',
     name: 'Stadsloket Zuid',
@@ -681,7 +633,67 @@ export const offices: Office[] = [
     ],
   },
 
-  // ─── Theemsweg 28 ── NEW ─────────────────────────────────────────
+  // ─── Anton de Komplein 150 ───────────────────────────────────────
+  {
+    id: 'antonkomplein',
+    name: 'Stadsloket Zuidoost',
+    address: 'Anton de Komplein 150, Zuidoost',
+    lat: 52.3162,  // ✓ Nominatim
+    lng: 4.9565,
+    zoom: 16,
+    restaurants: [
+      {
+        name: 'Oma Ietje',
+        address: 'Heesterveld 3',
+        description: 'Bar-restaurant en ontmoetingsplek in Zuidoost met lunch van 11–15:30. Lokaal, laagdrempelig en gezellig.',
+        walkingTime: 5,
+        busyness: 'Rustig op weekdagen',
+        busynessLevel: 'quiet',
+        recommend: 'Dagmenu of soep met brood',
+        price: '€',
+        lat: 52.3170,
+        lng: 4.9570,
+      },
+      {
+        name: 'Lebkov & Sons Bijlmer',
+        address: 'Hoekenrode 6',
+        description: 'Specialty koffie, verse sandwiches en salades vlakbij Bijlmer Arena metro. Snel en kwalitatief.',
+        walkingTime: 10,
+        busyness: 'Druk in de ochtend en middag',
+        busynessLevel: 'medium',
+        recommend: 'Sandwich van de dag of salade',
+        price: '€€',
+        lat: 52.3143,
+        lng: 4.9518,
+      },
+      {
+        name: 'Brasserie Hoekenrode',
+        address: 'Hoekenrode 2',
+        description: 'Grand café bij de Johan Cruyff Arena. Ruime brasserie met internationale kaart, open op weekdagen.',
+        walkingTime: 11,
+        busyness: 'Rustig op werkdagen',
+        busynessLevel: 'quiet',
+        recommend: 'Burger of dagschotel',
+        price: '€€',
+        lat: 52.3143,
+        lng: 4.9516,
+      },
+      {
+        name: 'The Traveller',
+        address: 'Bijlmerdreef 108',
+        description: 'Wereldkeuken restaurant open voor lunch en diner. Multiculturele sfeer, groot terras.',
+        walkingTime: 8,
+        busyness: 'Rustig overdag',
+        busynessLevel: 'quiet',
+        recommend: 'Dagsuggestie of rijstgerecht',
+        price: '€',
+        lat: 52.3155,
+        lng: 4.9497,
+      },
+    ],
+  },
+
+  // ─── Theemsweg 28 ────────────────────────────────────────────────
   // Confirmed postcode 1043 BJ → Sloterdijk bedrijventerrein
   {
     id: 'theemsweg',
@@ -693,7 +705,7 @@ export const offices: Office[] = [
     restaurants: [],
   },
 
-  // ─── Van Hogendorpstraat 202 ── NEW ─────────────────────────────
+  // ─── Van Hogendorpstraat 202 ─────────────────────────────────────
   {
     id: 'hogendorpstraat',
     name: 'Van Hogendorpstraat',
@@ -704,18 +716,7 @@ export const offices: Office[] = [
     restaurants: [],
   },
 
-  // ─── Vijzelstraat 32 (Herengracht 482) ── NEW ───────────────────
-  {
-    id: 'vijzelstraat',
-    name: 'Stadsarchief',
-    address: 'Vijzelstraat 32 / Herengracht 482, Centrum',
-    lat: 52.3647,  // ~ De Bazel building, Vijzelstraat
-    lng: 4.8966,
-    zoom: 16,
-    restaurants: [],
-  },
-
-  // ─── Weesperplein 8 ── NEW ───────────────────────────────────────
+  // ─── Weesperplein 8 ──────────────────────────────────────────────
   {
     id: 'weesperplein',
     name: 'Weesperplein',
