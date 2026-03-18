@@ -337,8 +337,8 @@ export const offices: Office[] = [
         busynessLevel: "medium",
         recommend: "Glas wijn in de zon",
         price: "€€",
-        lat: 0,
-        lng: 0
+        lat: 52.40363790057515, 
+        lng: 4.895178920198377, 
       }
     ],
     restaurants: [
@@ -363,8 +363,8 @@ export const offices: Office[] = [
         busynessLevel: 'quiet',
         recommend: 'Pizza Valentino + evt. glas witte wijn (shhh!)',
         price: '€',
-        lat: 52.40363790057515, 
-        lng: 4.895178920198377, 
+        lat: 52.403656223323566, 
+        lng: 4.892101331966502,
       },
       {
         name: 'Bagels & Beans',
