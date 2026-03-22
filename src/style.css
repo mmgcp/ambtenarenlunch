@@ -327,7 +327,9 @@ html, body {
 .busy-medium .meta-bar.filled { background: #b8760a; }
 .busy-busy   .meta-bar.filled { background: #c41e3a; }
 
-.price .meta-bar.filled { background: var(--warm-gray); }
+.price-cheap    .meta-bar.filled { background: #f5c842; }
+.price-medium   .meta-bar.filled { background: #d4900a; }
+.price-expensive .meta-bar.filled { background: #b85c00; }
 
 /* ─── Custom map marker ──────────────────────────────────────────── */
 .office-marker-icon {
@@ -350,11 +352,11 @@ html, body {
 }
 
 .borrel-mode .office-marker-icon {
-  background: #1a3a6b;
+  background: #2563eb;
 }
 
 .borrel-mode .office-marker-icon.selected {
-  background: #1a3a6b;
+  background: #2563eb;
 }
 
 .restaurant-marker-wrap {

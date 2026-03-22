@@ -15,9 +15,13 @@ const modeConfig = {
     modalTitle: 'Stel een lunchplek voor',
     suggestBtnText: 'Stel een lunchplek voor',
     formNameLabel: 'Naam restaurant',
+    formNamePlaceholder: 'bijv. Tjin\'s',
     formQueueLabel: 'Sta je hier (vaak) in de rij?',
+    formQueuePlaceholder: 'bijv. Soms tien min. max',
     formPriceLabel: 'Hoeveel geef je gemiddeld uit voor lunch hier (in euros)?',
+    formPricePlaceholder: 'bijv. 7.50',
     formWhyLabel: 'Waarom is dit jouw tip en wat bestel jij hier het liefst?',
+    formWhyPlaceholder: 'bijv. Perfecte combi van lunchwandeling & lekker eten; de falafel wrap met halloumi is fantastisch! Wat wil een mens nog meer?',
     emptyIcon: '🍽️',
     emptyText: 'Aanbevelingen voor dit kantoor volgen binnenkort.',
     venueLabel: 'Eettip',
@@ -30,9 +34,13 @@ const modeConfig = {
     modalTitle: 'Stel een café voor',
     suggestBtnText: 'Stel een café voor',
     formNameLabel: 'Naam café of kroeg',
+    formNamePlaceholder: 'bijv. Café De Zwarte Ruiter',
     formQueueLabel: 'Hoe druk is het hier na werk?',
-    formPriceLabel: 'Hoeveel geef je gemiddeld uit per borrel (in euros)?',
+    formQueuePlaceholder: 'bijv. Druk op vrijdag, doordeweeks rustig',
+    formPriceLabel: 'Hoeveel kost een vaasje?',
+    formPricePlaceholder: 'bijv. 3,70',
     formWhyLabel: 'Waarom is dit jouw tip en wat drink jij hier het liefst?',
+    formWhyPlaceholder: 'bijv. Gezellig terras vlak bij kantoor; de witbier is heerlijk en ze hebben altijd goede bitterballen!',
     emptyIcon: '🍺',
     emptyText: 'Borrel aanbevelingen voor dit kantoor volgen binnenkort.',
     venueLabel: 'Tip',
@@ -258,7 +266,7 @@ function renderRestaurantCards(office: Office): void {
           <svg class="meta-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M17 7a6 6 0 1 0 0 10"/><line x1="6" y1="11" x2="14" y2="11"/><line x1="6" y1="13" x2="14" y2="13"/>
           </svg>
-          <span class="meta-label">Kosten</span>${makeBars(priceFilled, 'price')}
+          <span class="meta-label">Kosten</span>${makeBars(priceFilled, `price price-${priceFilled === 1 ? 'cheap' : priceFilled === 2 ? 'medium' : 'expensive'}`)}
         </div>
         <div class="meta-row">
           <svg class="meta-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -343,6 +351,10 @@ function openSuggestModal(preselectedOfficeId?: string): void {
   document.getElementById('label-suggest-queue')!.textContent = config.formQueueLabel;
   document.getElementById('label-suggest-price')!.textContent = config.formPriceLabel;
   document.getElementById('label-suggest-why')!.textContent = config.formWhyLabel;
+  (document.getElementById('suggest-name') as HTMLInputElement).placeholder = config.formNamePlaceholder;
+  (document.getElementById('suggest-queue') as HTMLInputElement).placeholder = config.formQueuePlaceholder;
+  (document.getElementById('suggest-price') as HTMLInputElement).placeholder = config.formPricePlaceholder;
+  (document.getElementById('suggest-why') as HTMLTextAreaElement).placeholder = config.formWhyPlaceholder;
   (document.getElementById('suggest-mode') as HTMLInputElement).value = currentMode;
 
   // Populate office dropdown
