@@ -126,6 +126,10 @@ html, body {
   flex-shrink: 0;
 }
 
+.borrel-mode .office-dot {
+  background: #2563eb;
+}
+
 .office-btn-text {
   display: flex;
   flex-direction: column;
