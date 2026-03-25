@@ -396,6 +396,19 @@ html, body {
   background: var(--red);
 }
 
+.borrel-mode .restaurant-marker-label {
+  border-color: #2563eb;
+}
+
+.borrel-mode .restaurant-marker-label.selected {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.borrel-mode .restaurant-marker-pin {
+  background: #2563eb;
+}
+
 @keyframes popIn {
   from { opacity: 0; transform: scale(0.5); }
   to   { opacity: 1; transform: scale(1); }
