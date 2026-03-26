@@ -34,7 +34,7 @@ const modeConfig = {
     modalTitle: 'Stel een café voor',
     suggestBtnText: 'Stel een café voor',
     formNameLabel: 'Naam café of kroeg',
-    formNamePlaceholder: 'bijv. Café De Zwarte Ruiter',
+    formNamePlaceholder: 'bijv. Poesiat & Kater',
     formQueueLabel: 'Hoe druk is het hier na werk?',
     formQueuePlaceholder: 'bijv. Druk op vrijdag, doordeweeks rustig',
     formPriceLabel: 'Hoeveel kost een vaasje?',
