@@ -257,7 +257,7 @@ export const offices: Office[] = [
     borrelVenues: [
       {
         name: 'tHuis aan de Amstel',
-        address: 'Zeeburgererstraat 1',
+        address: 'Korte Ouderkerkerdijk 45',
         description: 'Café in wat voorheen de ambtswoning was van de directeur van de Zuidergasfabriek. Sfeervol en met mooie tuin.',
         walkingTime: 15,
         busyness: 'Wisselend',
@@ -271,7 +271,7 @@ export const offices: Office[] = [
     restaurants: [
       {
         name: 'tHuis aan de Amstel',
-        address: 'Zeeburgererstraat 1',
+        address: 'Korte Ouderkerkerdijk 45',
         description: 'Café in wat voorheen de ambtswoning was van de directeur van de Zuidergasfabriek. Sfeervol en met mooie tuin, als je tijd hebt voor een lange lunch.',
         walkingTime: 15,
         busyness: 'Wisselend',
@@ -285,7 +285,7 @@ export const offices: Office[] = [
         name: 'Fetch',
         address: 'Daniël Goedkoopstraat 8',
         description: 'Tegenover even snel een broodje en goeie koffie halen, voor als je snel doormoet.',
-        walkingTime: 15,
+        walkingTime: 1,
         busyness: 'Soms wat drukker rond de lunch',
         busynessLevel: 'quiet',
         recommend: '...',
@@ -299,7 +299,7 @@ export const offices: Office[] = [
   // ─── Entrada 600 ─────────────────────────────────────────────────
   // Confirmed as "Entrada 600", postcode 1114 AA, Amsterdam-Duivendrecht
   {
-    id: 'entrade600',
+    id: 'entrada600',
     name: 'Entrada 600',
     address: 'Entrada 600, Duivendrecht',
     lat: 52.330037476488336,  // ~ manual check
@@ -419,7 +419,7 @@ export const offices: Office[] = [
         walkingTime: 12,
         busyness: 'Groot terras en grote ruimte - vaak nog wel plek',
         busynessLevel: 'medium',
-        recommend: 'Little smullings,
+        recommend: 'Little smullings',
         price: '€',
         lat: 52.357840034639786, 
         lng: 4.936261903620158,
