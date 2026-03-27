@@ -786,6 +786,10 @@ html, body {
     font-size: 1rem;
   }
 
+  #mobile-header .mode-toggle {
+    margin-bottom: 6px;
+  }
+
   /* Mobile bottom bar */
   #mobile-bar {
     display: flex;
