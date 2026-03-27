@@ -1,7 +1,7 @@
 import 'leaflet/dist/leaflet.css';
 import './style.css';
 import L from 'leaflet';
-import { offices, type Office } from './data';
+import { offices, type Office, type Restaurant } from './data';
 
 // ─── Mode config ──────────────────────────────────────────────────────
 type Mode = 'lunch' | 'borrel';
@@ -47,6 +47,8 @@ const modeConfig = {
   },
 } as const;
 
+function isMobile(): boolean { return window.innerWidth <= 600; }
+
 // ─── State ───────────────────────────────────────────────────────────
 let map: L.Map;
 let tileLayer: L.TileLayer;
@@ -68,6 +70,13 @@ const suggestForm = document.getElementById('suggest-form') as HTMLFormElement;
 const formSuccess = document.getElementById('form-success') as HTMLElement;
 const officeSelect = document.getElementById('suggest-office') as HTMLSelectElement;;
 
+// ─── Mobile DOM refs ──────────────────────────────────────────────────
+const mobileBackBtn = document.getElementById('mobile-back-btn')!;
+const mobileSheet = document.getElementById('mobile-sheet')!;
+const mobileSheetName = document.getElementById('mobile-sheet-name')!;
+const mobileSheetBody = document.getElementById('mobile-sheet-body')!;
+const mobileSiteTitle = document.getElementById('mobile-site-title')!;
+
 // ─── Map initialisation ───────────────────────────────────────────────
 function initMap(): void {
   map = L.map('map', {
@@ -85,7 +94,10 @@ function initMap(): void {
   placeOfficeMarkers();
 
   map.on('click', () => {
-    if (restaurantPanel.classList.contains('visible')) {
+    if (isMobile()) {
+      if (mobileSheet.classList.contains('open')) closeMobileSheet();
+      else if (currentOfficeId) goBack();
+    } else if (restaurantPanel.classList.contains('visible')) {
       goBack();
     }
   });
@@ -148,52 +160,128 @@ function clearRestaurantMarkers(): void {
   restaurantMarkers = [];
 }
 
+// ─── Mobile sheet ─────────────────────────────────────────────────────
+function populateMobileSheet(venue: Restaurant): void {
+  const config = modeConfig[currentMode];
+  const busyFilled = venue.busynessLevel === 'quiet' ? 1 : venue.busynessLevel === 'medium' ? 2 : 3;
+  const priceFilled = (venue.price.match(/€/g) ?? []).length;
+
+  mobileSheetName.textContent = venue.name;
+  mobileSheetBody.innerHTML = `
+    <p class="card-address">${venue.address}</p>
+    <p class="card-description" style="margin-top:8px">${venue.description}</p>
+    <div class="card-meta">
+      <div class="meta-row">
+        <svg class="meta-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span><span class="meta-label">Afstand</span><span class="meta-value">${venue.walkingTime} min lopen</span></span>
+      </div>
+      <div class="meta-row">
+        <svg class="meta-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span class="meta-label">Drukte</span>${makeBars(busyFilled, `busy-${venue.busynessLevel}`)}
+      </div>
+      <div class="meta-row">
+        <svg class="meta-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 7a6 6 0 1 0 0 10"/><line x1="6" y1="11" x2="14" y2="11"/><line x1="6" y1="13" x2="14" y2="13"/>
+        </svg>
+        <span class="meta-label">Kosten</span>${makeBars(priceFilled, `price price-${priceFilled === 1 ? 'cheap' : priceFilled === 2 ? 'medium' : 'expensive'}`)}
+      </div>
+      <div class="meta-row">
+        <svg class="meta-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+        </svg>
+        <span><span class="meta-label">${config.venueLabel}</span><span class="meta-value">${venue.recommend}</span></span>
+      </div>
+    </div>
+  `;
+}
+
+function openMobileSheet(): void {
+  mobileSheet.classList.add('open');
+}
+
+function closeMobileSheet(): void {
+  mobileSheet.classList.remove('open');
+  restaurantMarkers.forEach((m) => {
+    const el = m.getElement();
+    if (!el) return;
+    const label = el.querySelector('.restaurant-marker-label');
+    if (label) label.classList.remove('selected');
+  });
+}
+
 // ─── Office selection ─────────────────────────────────────────────────
 function selectOffice(office: Office): void {
   currentOfficeId = office.id;
 
-  // Update marker icons
   officeMarkers.forEach((marker, id) => {
     marker.setIcon(makeOfficeIcon(id === office.id ? 'selected' : 'deselected'));
   });
 
-  // Fly to office
   map.flyTo([office.lat, office.lng], office.zoom, { duration: 1.1 });
-
-  // Show restaurant markers
   placeRestaurantMarkers(office);
 
-  // Render restaurant cards
-  renderRestaurantCards(office);
-
-  // Swap panels
-  officePanel.style.display = 'none';
-  restaurantPanel.classList.add('visible');
-  panelOfficeName.textContent = office.name;
-  panelOfficeAddress.textContent = office.address;
+  if (isMobile()) {
+    mobileBackBtn.removeAttribute('hidden');
+  } else {
+    renderRestaurantCards(office);
+    officePanel.style.display = 'none';
+    restaurantPanel.classList.add('visible');
+    panelOfficeName.textContent = office.name;
+    panelOfficeAddress.textContent = office.address;
+  }
 }
 
 function goBack(): void {
+  if (isMobile() && mobileSheet.classList.contains('open')) {
+    closeMobileSheet();
+    return;
+  }
+
   currentOfficeId = null;
 
-  // Reset all office markers
   officeMarkers.forEach((marker) => {
     marker.setIcon(makeOfficeIcon('normal'));
   });
 
   clearRestaurantMarkers();
-
-  // Fly back to city overview
   map.flyTo([52.3676, 4.9041], 12, { duration: 1.1 });
 
-  // Swap panels
-  restaurantPanel.classList.remove('visible');
-  officePanel.style.display = 'flex';
+  if (isMobile()) {
+    mobileBackBtn.setAttribute('hidden', '');
+  } else {
+    restaurantPanel.classList.remove('visible');
+    officePanel.style.display = 'flex';
+  }
 }
 
 // ─── Restaurant selection ─────────────────────────────────────────────
 function selectRestaurant(index: number, source: 'card' | 'pin' = 'pin'): void {
-  // Update cards
+  // Update marker labels
+  restaurantMarkers.forEach((m, i) => {
+    const el = m.getElement();
+    if (!el) return;
+    const label = el.querySelector('.restaurant-marker-label');
+    if (label) label.classList.toggle('selected', i === index);
+  });
+
+  if (isMobile()) {
+    const office = offices.find((o) => o.id === currentOfficeId);
+    if (!office) return;
+    const venues = currentMode === 'lunch' ? office.restaurants : (office.borrelVenues ?? []);
+    const venue = venues[index];
+    if (!venue) return;
+    const marker = restaurantMarkers[index];
+    if (marker) map.panTo(marker.getLatLng(), { animate: true, duration: 0.5 });
+    populateMobileSheet(venue);
+    openMobileSheet();
+    return;
+  }
+
+  // Desktop: update cards
   const cards = restaurantList.querySelectorAll('.restaurant-card');
   cards.forEach((c) => c.classList.remove('selected'));
   const card = cards[index] as HTMLElement | undefined;
@@ -201,14 +289,6 @@ function selectRestaurant(index: number, source: 'card' | 'pin' = 'pin'): void {
     card.classList.add('selected');
     if (source === 'pin') card.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-
-  // Update marker labels + pan map
-  restaurantMarkers.forEach((m, i) => {
-    const el = m.getElement();
-    if (!el) return;
-    const label = el.querySelector('.restaurant-marker-label');
-    if (label) label.classList.toggle('selected', i === index);
-  });
 
   if (source === 'card') {
     const marker = restaurantMarkers[index];
@@ -313,6 +393,7 @@ function switchMode(mode: Mode): void {
 
   // Title, tagline + tab
   document.querySelector<HTMLElement>('.site-title')!.textContent = config.title;
+  mobileSiteTitle.textContent = config.title;
   document.title = config.title;
   updateTagline();
 
@@ -337,8 +418,13 @@ function switchMode(mode: Mode): void {
     el.textContent = config.suggestBtnText;
   });
 
-  // Go back to office list if in restaurant view
-  if (restaurantPanel.classList.contains('visible')) goBack();
+  // Reset state when switching modes
+  if (isMobile()) {
+    if (mobileSheet.classList.contains('open')) closeMobileSheet();
+    if (currentOfficeId) goBack();
+  } else if (restaurantPanel.classList.contains('visible')) {
+    goBack();
+  }
 }
 
 // ─── Suggest modal ────────────────────────────────────────────────────
@@ -416,8 +502,16 @@ suggestForm.addEventListener('submit', async (e) => {
 window.addEventListener('resize', updateTagline);
 updateTagline();
 backBtn.addEventListener('click', goBack);
-document.querySelector<HTMLElement>('.mode-toggle')!.addEventListener('click', () => {
-  switchMode(currentMode === 'lunch' ? 'borrel' : 'lunch');
+mobileBackBtn.addEventListener('click', goBack);
+document.getElementById('mobile-sheet-close')!.addEventListener('click', closeMobileSheet);
+document.getElementById('mobile-suggest-btn')!.addEventListener('click', () => {
+  openSuggestModal(currentOfficeId ?? undefined);
+});
+document.getElementById('mobile-suggest-btn-sheet')!.addEventListener('click', () => {
+  openSuggestModal(currentOfficeId ?? undefined);
+});
+document.querySelectorAll<HTMLElement>('.mode-toggle').forEach((el) => {
+  el.addEventListener('click', () => switchMode(currentMode === 'lunch' ? 'borrel' : 'lunch'));
 });
 renderOfficeList();
 initMap();
