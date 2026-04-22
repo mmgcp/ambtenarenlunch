@@ -477,7 +477,7 @@ export const offices: Office[] = [
       {
         name: 'The Cottage Shop & Deli',
         address: 'Linnaeusstraat 76',
-        description: 'Een kleine deli, afgesplitst van het restaurant met de gelijksoortige naam',
+        description: 'Een kleine deli, afgesplitst van het restaurant met de gelijksoortige naam. Wel duur!',
         walkingTime: 3,
         busyness: 'Rustig',
         busynessLevel: 'quiet',
@@ -485,6 +485,18 @@ export const offices: Office[] = [
         price: '€€€',
         lat: 52.35670849995435,
         lng: 4.927161868234979,
+      },
+      {
+        name: 'Beruchte broodjes',
+        address: 'Pretoriusstraat 36H',
+        description: 'Broodjeszaak',
+        walkingTime: 5,
+        busyness: 'Soms 8 minuten max',
+        busynessLevel: 'quiet',
+        recommend: 'Het beruchte broodje natuurlijk!',
+        price: '€€',
+        lat: 52.35611759938631,
+        lng: 4.926690737299776,
       }
     ],
   },
@@ -578,7 +590,32 @@ export const offices: Office[] = [
     lat: 52.36168070513284,  // ~ manual check
     lng: 4.907024126381902,
     zoom: 16,
-    restaurants: [],
+    restaurants: [
+      {
+        name: 'Cantarell',
+        address: 'Weesperplein 13-15',
+        description: 'Klassieker op het Weesperplein, met een ruim assortiment.',
+        walkingTime: 1,
+        busyness: 'Altijd wel eventjes wachten, kan duren voor je je eten hebt',
+        busynessLevel: 'busy',
+        recommend: 'Uitsmijter',
+        price: '€€',
+        lat: 52.36196444855997, 
+        lng: 4.9082021611703315,
+      },
+      {
+        name: 'Bakhuys',
+        address: 'Sarphatistraat 61',
+        description: 'Lekkere bakker met broodjes, salades, koekjes en goede koffie. Vaak een rij, maar die gaat snel.',
+        walkingTime: 1,
+        busyness: 'Altijd wel eventjes wachten, maar gaat snel',
+        busynessLevel: 'medium',
+        recommend: 'Salade broccoli en broodje kaas',
+        price: '€€',
+        lat: 52.361200294915065, 
+        lng: 4.907214649511858,
+      }
+    ],
     borrelVenues: [
       {
         name: 'Bar Lempicka',
